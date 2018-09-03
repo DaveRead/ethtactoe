@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TicTacToe on the Blockchain</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+  <script src="./app.js"></script>
+  <script>
+    // https://stackoverflow.com/questions/33855641/copy-output-of-a-javascript-variable-to-the-clipboard
+    function copyToClipboard(val){
+      var dummy = document.createElement("input");
+      document.body.appendChild(dummy);
+      dummy.setAttribute("id", "dummy_id");
+      document.getElementById("dummy_id").value=val;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+    }
+  </script>
+  <script>
+    // https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
+    function copyGameAddress() {
+      var copyText = document.getElementById("game-address-copyable");
+      copyToClipboard(copyText.value);
+//      copyText.select();
+//      document.execCommand("copy");
+//      alert("Copied the text: " + copyText.value);
+    }
+  </script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg text-center">
+  <h1>TicTacToe</h1>
+  <h2>Distributed TicTacToe on the Blockchain</h2>
+  <table id="centerTable" border="1">
+    <tr><th>Status</th><td><div id="status">Waiting for You to Create or Join a Game</div></td></tr>
+  </table>
+  <hr/>
+  <table id="board" class="in-game waiting-for-join">
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="game-start">
+  <br/><br/><button id="create" onclick="App.createNewGame()" class="btn btn-primary">Create Game</button>
+  - or - <button id="join" onclick="App.joinGame()" class="btn btn-default">Join Game</button>
+  <br/>One game costs 0.1 Ether<br/>
+</div>
+<div class="leave-game">
+  <br/><br/><button id="leave" onclick="App.resetForNewGame()" class="btn btn-default">Exit Game</button>
+  <br/><span class="hint small">Select this to close the board and optionally create or join another game</span><br/>
+</div>
+<div class="in-game">
+  <table id="centerTable" border="1">
+    <tr><th>Game Address</th><td><input type="hidden" id="game-address-copyable"/><span id="game-address"></span></td><td><button class="btn btn-sm" onclick="copyGameAddress()">Copy</button></td></tr>
+    <tr><th>Your Account Value</th><td colspan="2"><span id="account-value"></span></td></tr>
+    <div class="waiting-for-join"><tr><th>Opponent Address</th><td colspan="2"><span id="opponent-address"></span></td></tr></div>
+  </table>
+</div>
+  <hr/>
+  <button class="btn btn-sm game-start" id="account1" onclick="App.useAccountOne()">Use Second Account</button>
+  <br/>
+  <span class="hint small"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+</div>
+</div>
+</div>
+</body>
+</html>
